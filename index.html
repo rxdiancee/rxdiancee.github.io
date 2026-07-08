@@ -152,7 +152,7 @@ return;
 
 
 await db
-.from("rsvps")
+.from("rsvp")
 .insert({
 
 name:name
@@ -225,7 +225,7 @@ async function loadGuests(){
 
 let {data,error} =
 await db
-.from("rsvps")
+.from("rsvp")
 .select("*")
 .order(
 "created_at",
