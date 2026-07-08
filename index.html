@@ -4,7 +4,7 @@
 
 <head>
 
-<title>1 Wedding Invite</title>
+<title>0 Wedding Invite</title>
 
 
 <style>
@@ -151,13 +151,17 @@ return;
 
 
 
-await db
-.from("rsvp")
-.insert({
+let { data, error } = await db
+    .from("rsvp")
+    .insert({
+        name: name
+    });
 
-name:name
-
-});
+if (error) {
+    console.log("Insert failed:", error);
+    alert(error.message);
+    return;
+}
 
 
 
