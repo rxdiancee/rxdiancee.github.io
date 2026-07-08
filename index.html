@@ -222,52 +222,58 @@ parts[1][0]
 
 async function loadGuests(){
 
-
-let {data,error} =
-await db
-.from("rsvp")
-.select("*")
-.order(
-"created_at",
-{
-ascending:false
-}
-);
-
+    let {data,error} =
+    await db
+    .from("rsvps")
+    .select("*")
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    );
 
 
-let list =
-document
-.getElementById("guestList");
+    if(error){
+
+        console.log(error);
+
+        document
+        .getElementById("guestList")
+        .innerHTML =
+        "Unable to load RSVPs";
+
+        return;
+
+    }
 
 
-
-list.innerHTML="";
-
-
-
-data.forEach(
-guest=>{
+    let list =
+    document.getElementById("guestList");
 
 
-let item =
-document.createElement("li");
+    list.innerHTML="";
 
 
-
-item.innerHTML =
-hideName(guest.name)
-+
-" rsvped!";
+    data.forEach(
+        guest=>{
 
 
+            let item =
+            document.createElement("li");
 
-list.appendChild(item);
+
+            item.innerHTML =
+            hideName(guest.name)
+            +
+            " rsvped!";
 
 
+            list.appendChild(item);
 
-});
 
+        }
+    );
 
 }
 
